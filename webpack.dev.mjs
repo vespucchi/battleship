@@ -1,14 +1,22 @@
-const { merge } = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path');
-const common = require('./webpack.common');
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-extraneous-dependencies */
+import { merge } from 'webpack-merge';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import common from './webpack.common.mjs';
 
-module.exports = merge(common, {
+const { loader } = MiniCssExtractPlugin;
+const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const _dirname = path.dirname(__filename); // get the name of the directory
+
+export default merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
     watch: true,
     output: {
-        path: path.resolve(__dirname, 'dev'),
+        path: path.resolve(_dirname, 'dev'),
         filename: '[name].js',
         clean: true,
         assetModuleFilename: '[name][ext]',
@@ -32,7 +40,7 @@ module.exports = merge(common, {
         rules: [
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: [loader, 'css-loader'],
             },
         ],
     },

@@ -1,13 +1,14 @@
-const { merge } = require('webpack-merge');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const path = require('path');
-const common = require('./webpack.common');
+/* eslint-disable import/no-extraneous-dependencies */
+import { merge } from 'webpack-merge';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import { resolve } from 'path';
+import common from './webpack.common.mjs';
 
-module.exports = merge(common, {
+export default merge(common, {
     mode: 'production',
     devtool: 'source-map',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: resolve(__dirname, 'dist'),
         filename: 'bundle.[contenthash].js',
         clean: true,
         assetModuleFilename: '[name].[contenthash][ext]',
