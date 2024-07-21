@@ -25,6 +25,16 @@ describe('Placing ships horizontally', () => {
         expect(board.placeShip(0, 0, 6, 5)).toBeTruthy();
         expect(board.placeShip(1, 0, 7, 7)).toBeFalsy();
     });
+
+    test('Place already placed ship', () => {
+        expect(board.placeShip(0, 0, 0, 0)).toBeTruthy();
+        expect(board.placeShip(0, 0, 8, 4)).toBeFalsy();
+    });
+
+    test('Place non-existent ship', () => {
+        expect(board.placeShip(10, 0, 0, 0)).toBeFalsy();
+        expect(board.placeShip(-1, 0, 0, 0)).toBeFalsy();
+    });
 });
 
 describe('Placing ships vertically', () => {
@@ -44,6 +54,16 @@ describe('Placing ships vertically', () => {
     test('Place ship too close to the edge', () => {
         expect(board.placeShip(0, 1, 0, 0)).toBeTruthy();
         expect(board.placeShip(1, 1, 7, 0)).toBeFalsy();
+    });
+
+    test('Place already placed ship', () => {
+        expect(board.placeShip(0, 1, 0, 0)).toBeTruthy();
+        expect(board.placeShip(0, 0, 7, 4)).toBeFalsy();
+    });
+
+    test('Place non-existent ship', () => {
+        expect(board.placeShip(10, 0, 0, 0)).toBeFalsy();
+        expect(board.placeShip(-1, 0, 0, 0)).toBeFalsy();
     });
 });
 

@@ -12,6 +12,7 @@ const gameboard = () => {
     }
 
     const ships = [];
+    const placedShips = [null, null, null, null, null];
 
     // create ships
     ships.push(ship(5));
@@ -22,6 +23,9 @@ const gameboard = () => {
 
     // place ships on the grid
     const placeShip = (shipIndex, axis, y, x) => {
+        if (shipIndex > 4 || shipIndex < 0) return false;
+        if (placedShips[shipIndex] === true) return false;
+
         const gridCopy = JSON.parse(JSON.stringify(grid));
         let shipLength = ships[shipIndex].length();
 
@@ -43,6 +47,7 @@ const gameboard = () => {
                 shipLength -= 1;
             }
         }
+        placedShips[shipIndex] = true;
         grid = gridCopy;
         return true;
     };
