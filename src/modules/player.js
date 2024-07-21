@@ -6,9 +6,7 @@ const player = (_type) => {
 
     const playerType = () => type;
 
-    const getBoard = () => board;
-
-    return { playerType, getBoard };
+    return { playerType, board };
 };
 
 export default player;
