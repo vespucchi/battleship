@@ -1,4 +1,5 @@
-import ship from './ship';
+/* eslint-disable import/extensions */
+import ship from './ship.js';
 
 const gameboard = () => {
     let grid = [];
@@ -13,6 +14,7 @@ const gameboard = () => {
 
     const ships = [];
     const placedShips = [null, null, null, null, null];
+    const receivedShots = [...grid];
 
     // create ships
     ships.push(ship(5));
@@ -53,33 +55,45 @@ const gameboard = () => {
     };
 
     // check whether game is over
-    const isGameOver = (shipsArray) => !shipsArray.filter((el) => el.isSunk() === false).length;
+    const isGameOver = (shipArray) => {
+        if (shipArray) {
+            return !shipArray.filter((el) => el.isSunk() === false).length;
+        }
+        return !ships.filter((el) => el.isSunk() === false).length;
+    };
 
     // check whether ship is sunk
-    const isShipSunk = (shipElement) => shipElement.isSunk();
+    const isShipSunk = (shipElement) => ships[shipElement].isSunk();
 
     // register attacks
     const receiveAttack = (y, x) => {
-        if (grid[y][x] !== null && grid[y][x] !== 'M') {
-            const shipIndex = grid[y][x];
-            ships[shipIndex].hit();
-            isShipSunk(ships[shipIndex]);
-            isGameOver(ships);
+        if (receivedShots[y][x] === null) {
+            if (grid[y][x] !== null) {
+                const shipIndex = grid[y][x];
+                ships[shipIndex].hit();
+                receivedShots[y][x] = 'H';
 
-            return true;
+                return true;
+            }
+            receivedShots[y][x] = 'M';
         }
-        // register missed shot
-        grid[y][x] = 'M';
 
         return false;
     };
 
-    const getGrid = () => grid;
+    const getGrid = (y, x) => {
+        if (y === undefined || x === undefined) return grid;
+        return grid[y][x];
+    };
+
+    const getCellStatus = (y, x) => receivedShots[y][x];
 
     return {
         getGrid,
+        getCellStatus,
         placeShip,
         receiveAttack,
+        isShipSunk,
         isGameOver,
     };
 };

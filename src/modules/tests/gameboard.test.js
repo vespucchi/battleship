@@ -104,3 +104,17 @@ describe('Receiving attack', () => {
         expect(board.isGameOver(shipsArray2)).toBeTruthy();
     });
 });
+
+describe('Get grid info', () => {
+    test('Get ship info at specific grid coords', () => {
+        board.placeShip(0, 0, 0, 0);
+        expect(board.getGrid(0, 0)).toBe(0);
+        expect(board.getGrid(1, 1)).toBeNull();
+    });
+
+    test('Get entire grid', () => {
+        board.placeShip(0, 0, 0, 0);
+        expect(board.getGrid()[0]).toContain(0);
+        expect(board.getGrid()[0]).toContain(null);
+    });
+});
