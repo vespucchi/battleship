@@ -1,0 +1,32 @@
+dialog#game-over[open] {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.5rem;
+
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+dialog::backdrop {
+    background-color: black;
+    opacity: 0.5;
+}
+
+button#restart {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: antiquewhite;
+}
+
+button#restart:hover {
+    background-color: rgb(247, 210, 163);
+    transform: scale(1.05);
+}

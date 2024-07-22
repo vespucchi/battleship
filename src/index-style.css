@@ -1,6 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
+    outline: none;    
 }
 
 body {
@@ -51,6 +52,19 @@ body {
     background-color: #306685;
 }
 
+.right-board .board-cell.missed:hover,
+.right-board .board-cell.hit:hover {
+    cursor: not-allowed;
+}
+
+.right-board .board-cell.missed:hover {
+    background-color: darkred;
+}
+
+.right-board .board-cell.hit:hover {
+    background-color: limegreen;
+}
+
 .board-cell.missed {
     background-color: darkred;
 }
@@ -58,4 +72,3 @@ body {
 .board-cell.hit {
     background-color: limegreen;
 }
-
